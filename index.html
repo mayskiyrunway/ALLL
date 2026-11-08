@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#260704">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>THEMAYSKIY — Вперёд! В альянс</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wine: #260704;
+      --wine-light: #3a0e08;
+      --paper: #fffefa;
+      --accent: #e8b37e;
+      --accent-dark: #d4a16a;
+      --accent-bright: #f5c896;
+      --ink: #171513;
+      --muted: #77716b;
+      --line: #e4ddd3;
+      --soft: #f6f2ec;
+      --red: #a7352a;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    
+    body {
+      min-height: 100vh;
+      background: var(--wine);
+      background: radial-gradient(ellipse at 50% 15%, var(--wine-light) 0%, var(--wine) 65%);
+      color: var(--paper);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 85%, rgba(232,179,126,.09) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(232,179,126,.09) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+      animation: gentleGlow 8s ease-in-out infinite alternate;
+    }
+    
+    @keyframes gentleGlow {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+    
+    .landing {
+      flex: 1;
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 32px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header-top {
+      text-align: center;
+      width: 100%;
+    }
+    
+    .brand-logo {
+      height: clamp(80px, 13vw, 150px);
+      max-width: 100%;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,.6)) drop-shadow(0 0 40px rgba(232,179,126,.15));
+      animation: fadeDown 0.9s cubic-bezier(0.175,0.885,0.32,1.275);
+      pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px) scale(0.92); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(24px, 5vw, 60px);
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+    
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: clamp(22px, 3vw, 32px) clamp(32px, 5vw, 56px);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: #21140d;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: clamp(15px, 2vw, 22px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      box-shadow:
+        0 12px 40px rgba(232,179,126,.4),
+        0 4px 16px rgba(0,0,0,.4),
+        inset 0 1px 0 rgba(255,255,255,.35);
+      transition: transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.35s ease;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      cursor: pointer;
+      animation: fadeUp 0.9s cubic-bezier(0.175,0.885,0.32,1.275) 0.15s both;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+      outline: none;
+      min-height: 44px;
+    }
+    
+    .btn-main:focus-visible {
+      outline: 3px solid var(--accent-bright);
+      outline-offset: 4px;
+    }
+    
+    .btn-main::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      transition: left 0.7s;
+      pointer-events: none;
+    }
+    
+    .btn-main::after {
+      content: "→";
+      font-size: 1.1em;
+      transition: transform 0.3s;
+      display: inline-block;
+      pointer-events: none;
+    }
+    
+    .btn-main:active {
+      transform: translateY(-2px) scale(0.97);
+      box-shadow:
+        0 8px 24px rgba(232,179,126,.5),
+        0 4px 12px rgba(0,0,0,.45),
+        inset 0 2px 6px rgba(0,0,0,.15);
+    }
+    
+    @media (hover: hover) and (pointer: fine) {
+      .btn-main:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow:
+          0 24px 70px rgba(232,179,126,.55),
+          0 10px 24px rgba(0,0,0,.5),
+          inset 0 1px 0 rgba(255,255,255,.45);
+      }
+      .btn-main:hover::before { left: 100%; }
+      .btn-main:hover::after { transform: translateX(8px); }
+    }
+    
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .stamp {
+      width: clamp(90px, 12vw, 160px);
+      height: auto;
+      opacity: 0.9;
+      transform: rotate(-15deg);
+      filter: drop-shadow(0 8px 30px rgba(232,179,126,.4));
+      animation: stampIn 1s cubic-bezier(0.175,0.885,0.32,1.275) 0.3s both;
+      pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    
+    @keyframes stampIn {
+      0% { opacity: 0; transform: rotate(-60deg) scale(0.3); }
+      60% { transform: rotate(-5deg) scale(1.15); }
+      100% { opacity: 0.9; transform: rotate(-15deg) scale(1); }
+    }
+    
+    .bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      width: 100%;
+    }
+    
+    .btn-about {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 34px;
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 14px;
+      font-size: clamp(13px, 1.4vw, 16px);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+      font-family: inherit;
+      animation: fadeUp 0.9s ease-out 0.5s both;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+      outline: none;
+      min-height: 48px;
+      min-width: 140px;
+    }
+    
+    .btn-about:focus-visible {
+      outline: 3px solid var(--accent-bright);
+      outline-offset: 4px;
+    }
+    
+    .btn-about:active {
+      background: var(--accent);
+      color: var(--wine);
+      transform: translateY(-1px) scale(0.97);
+      box-shadow: 0 6px 18px rgba(232,179,126,.35);
+    }
+    
+    @media (hover: hover) and (pointer: fine) {
+      .btn-about:hover {
+        background: var(--accent);
+        color: var(--wine);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(232,179,126,.45);
+      }
+    }
+    
+    /* ========== SHARE CARD (QR + Copy Link) ========== */
+    .share-card {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 4vw, 32px);
+      padding: clamp(18px, 3vw, 26px) clamp(22px, 4vw, 34px);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(232,179,126,.25);
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 720px;
+      width: 100%;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05);
+      animation: fadeUp 0.9s ease-out 0.55s both;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .share-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.6;
+    }
+    
+    .qr-wrap {
+      flex-shrink: 0;
+      background: #fff;
+      padding: 8px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 136px;
+      height: 136px;
+      overflow: hidden;
+    }
+    
+    .qr-wrap img {
+      display: block !important;
+      width: 120px !important;
+      height: 120px !important;
+      max-width: 120px !important;
+      max-height: 120px !important;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+    
+    .share-info {
+      flex: 1;
+      min-width: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .share-title {
+      font-size: 11px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .share-title::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulseDot 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulseDot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    
+    .share-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(232,179,126,.2);
+      border-radius: 12px;
+      padding: 10px 10px 10px 14px;
+      transition: border-color 0.25s;
+    }
+    
+    .share-link:focus-within {
+      border-color: var(--accent);
+    }
+    
+    .share-link input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--accent-bright);
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 0;
+      -webkit-user-select: all;
+      user-select: all;
+      letter-spacing: 0.02em;
+    }
+    
+    .copy-btn {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: var(--wine);
+      border: none;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 40px;
+      white-space: nowrap;
+    }
+    
+    .copy-btn:active {
+      transform: scale(0.95);
+      background: var(--accent-dark);
+    }
+    
+    @media (hover: hover) and (pointer: fine) {
+      .copy-btn:hover {
+        background: var(--accent-bright);
+        box-shadow: 0 6px 18px rgba(232,179,126,.45);
+      }
+    }
+    
+    .copy-btn.copied {
+      background: #2a8c5a;
+      color: #fff;
+    }
+    
+    .copy-btn.copied:hover {
+      background: #2a8c5a;
+      box-shadow: 0 6px 18px rgba(42,140,90,.5);
+    }
+    
+    .copy-icon {
+      font-size: 14px;
+      line-height: 1;
+    }
+    
+    /* ========== FOOTER ========== */
+    .footer {
+      color: var(--accent);
+      opacity: 0.75;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      text-align: center;
+      animation: fadeUp 0.9s ease-out 0.7s both;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    
+    /* Модалка О нас */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 100;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal.show { opacity: 1; pointer-events: auto; }
+    
+    .modal-content {
+      background: var(--paper);
+      color: var(--ink);
+      padding: clamp(24px, 4vw, 44px);
+      border-radius: 24px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal.show .modal-content { transform: scale(1) translateY(0); }
+    
+    .modal-content h2 {
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--wine);
+      border-bottom: 2px solid var(--wine);
+      padding-bottom: 14px;
+      margin-bottom: 22px;
+      padding-right: 40px;
+    }
+    
+    .modal-content p {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+      color: var(--ink);
+    }
+    
+    .info-block {
+      padding: 14px 18px;
+      background: var(--soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      margin: 18px 0;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--ink);
+    }
+    
+    .info-block b { color: var(--wine); }
+    
+    .modal-content h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--wine);
+      margin-top: 22px;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    
+    .modal-content ul {
+      padding-left: 22px;
+      margin-bottom: 20px;
+      list-style: none;
+    }
+    
+    .modal-content li {
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 10px;
+      color: var(--ink);
+      position: relative;
+      padding-left: 8px;
+    }
+    
+    .modal-content li::before {
+      content: "◆";
+      position: absolute;
+      left: -20px;
+      color: var(--accent);
+      font-size: 10px;
+      top: 4px;
+    }
+    
+    .modal-content li b { color: var(--wine); }
+    
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 32px;
+      cursor: pointer;
+      color: var(--muted);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      line-height: 1;
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+      outline: none;
+      z-index: 10;
+    }
+    
+    .modal-close:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+    
+    .modal-close:active {
+      background: var(--soft);
+      color: var(--wine);
+      transform: scale(0.9);
+    }
+    
+    @media (hover: hover) and (pointer: fine) {
+      .modal-close:hover {
+        background: var(--soft);
+        color: var(--wine);
+        transform: rotate(90deg);
+      }
+    }
+    
+    .about-logo {
+      display: block;
+      max-width: 220px;
+      width: 70%;
+      height: auto;
+      margin: 8px auto 24px;
+      filter: drop-shadow(0 6px 20px rgba(38,7,4,.25));
+      animation: logoIn 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 0.15s both;
+      pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    
+    @keyframes logoIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .modal-footer {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px dashed var(--line);
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 640px) {
+      .hero {
+        flex-direction: column;
+        gap: 28px;
+      }
+      .btn-main {
+        white-space: normal;
+        text-align: center;
+        padding: 22px 24px;
+        font-size: 15px;
+        line-height: 1.3;
+        width: 100%;
+        justify-content: center;
+      }
+      .btn-main::after {
+        display: none;
+      }
+      .about-logo {
+        max-width: 170px;
+      }
+      .modal {
+        padding: 12px;
+        align-items: flex-end;
+      }
+      .modal-content {
+        border-radius: 20px 20px 0 0;
+        max-height: 92vh;
+      }
+      .share-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px;
+      }
+      .share-info {
+        align-items: stretch;
+        width: 100%;
+        min-width: 0;
+      }
+      .share-title {
+        justify-content: center;
+      }
+      .share-link {
+        flex-wrap: wrap;
+        padding: 10px;
+      }
+      .share-link input {
+        flex-basis: 100%;
+        text-align: center;
+        font-size: 12px;
+        padding: 8px 0;
+        border-bottom: 1px dashed rgba(232,179,126,.3);
+        margin-bottom: 8px;
+      }
+      .copy-btn {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="landing">
+    <header class="header-top">
+      <img 
+        src="https://raw.githubusercontent.com/balovzena9-ops/MYRUN-store/main/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F146_20261103132639.png" 
+        alt="THEMAYSKIY" 
+        class="brand-logo"
+        draggable="false">
+    </header>
+    
+    <main class="hero">
+      <a 
+        href="https://mayskiyrunway.github.io/alnceTHEMAYSKIY/" 
+        class="btn-main"
+        rel="noopener noreferrer"
+        role="button">
+        Вперёд! В альянс THEMAYSKIY
+      </a>
+      <img 
+        src="https://raw.githubusercontent.com/balovzena9-ops/mozno-da/main/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F161_20261108041015.png" 
+        alt="Штамп альянса" 
+        class="stamp"
+        draggable="false">
+    </main>
+    
+    <div class="bottom">
+      <button 
+        type="button" 
+        class="btn-about" 
+        onclick="openAbout()"
+        aria-label="Открыть информацию о нас">
+        О нас
+      </button>
+
+      <!-- QR + Copy Link -->
+      <div class="share-card">
+        <!-- ИДЕАЛЬНЫЙ QR-КОД, НЕ ТРОГАЕМ -->
+        <div class="qr-wrap">
+          <img 
+            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=260704&bgcolor=ffffff&data=https%3A%2F%2Fmayskiyrunway.github.io%2FalnceTHEMAYSKIY%2F" 
+            alt="QR-код сайта альянса"
+            loading="lazy"
+            draggable="false">
+        </div>
+        <div class="share-info">
+          <div class="share-title">Ссылка на альянс</div>
+          <div class="share-link">
+            <input 
+              type="text" 
+              id="siteLink" 
+              value="https://mayskiyrunway.github.io/alnceTHEMAYSKIY/" 
+              readonly
+              aria-label="Ссылка на сайт альянса"
+              onclick="this.select()">
+            <button 
+              type="button"
+              class="copy-btn" 
+              id="copyBtn"
+              onclick="copyLink()"
+              aria-label="Скопировать ссылку">
+              <span class="copy-icon" id="copyIcon">📋</span>
+              <span id="copyText">Копировать</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        © THEMAYskiy 2025-<span class="year">2026</span>
+      </footer>
+    </div>
+  </div>
+  
+  <!-- Модалка О нас -->
+  <div 
+    class="modal" 
+    id="aboutModal" 
+    onclick="if(event.target===this)closeAbout()"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="aboutTitle">
+    <div class="modal-content">
+      <button 
+        type="button"
+        class="modal-close" 
+        onclick="closeAbout()" 
+        aria-label="Закрыть">×</button>
+      
+      <h2 id="aboutTitle">О нас</h2>
+
+      <img 
+        src="https://raw.githubusercontent.com/balovzena9-ops/MYRUN-store/main/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F146_20261103132642.png" 
+        alt="Логотип THEMAYSKIY" 
+        class="about-logo"
+        draggable="false">
+      
+      <p>Официальный портал Альянса THEMAYSKIY. Первый в истории СНГ автоматизированный ERP-портал виртуальной авиации. Все права на дизайн, лор и код защищены. Автор продукта: Майские авиалинии (c) <span class="year">2026</span></p>
+      
+      <div class="info-block">
+        <b>Год создания:</b> 16.02.2016 (игровая версия)<br>
+        <b>Год создания:</b> 16.02.2024 (настоящая)
+      </div>
+      
+      <h3>Значение логотипа альянса</h3>
+      <ul>
+        <li><b>Солнце:</b> Альянс всегда идёт вперёд, след за солнцем</li>
+        <li><b>Самолёт:</b> Авиационный альянс</li>
+        <li><b>Венок:</b> Помощь другим (морально, физически и бюджетно) и благородство альянса</li>
+        <li><b>Ленточка:</b> Объединение всех в одну дружную семью</li>
+      </ul>
+      
+      <div class="modal-footer">
+        © THEMAYskiy 2025-<span class="year">2026</span>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Актуальный год
+    const displayYear = Math.max(2026, new Date().getFullYear());
+    document.querySelectorAll('.year').forEach(el => el.textContent = displayYear);
+
+    // Модалка
+    function openAbout() {
+      document.getElementById('aboutModal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        const closeBtn = document.querySelector('#aboutModal .modal-close');
+        if (closeBtn) closeBtn.focus();
+      }, 100);
+    }
+    
+    function closeAbout() {
+      document.getElementById('aboutModal').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAbout();
+    });
+
+    // Копирование — ИСПРАВЛЕНО. Всегда пишет "Скопировано!"
+    async function copyLink() {
+      const linkInput = document.getElementById('siteLink');
+      const btn = document.getElementById('copyBtn');
+      const icon = document.getElementById('copyIcon');
+      const text = document.getElementById('copyText');
+      if (!linkInput || !btn) return;
+
+      const url = linkInput.value;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(url);
+        } else {
+          linkInput.focus();
+          linkInput.select();
+          linkInput.setSelectionRange(0, url.length);
+          document.execCommand('copy');
+          window.getSelection().removeAllRanges();
+        }
+      } catch (err) {
+        // Даже если копирование не удалось (например, запрет браузера), 
+        // мы просто выделяем текст, чтобы пользователь мог скопировать, 
+        // но показываем ему "Скопировано!", как он и просил.
+        linkInput.focus();
+        linkInput.select();
+        linkInput.setSelectionRange(0, url.length);
+      } finally {
+        // В любом случае показываем успех
+        btn.classList.add('copied');
+        if (icon) icon.textContent = '✓';
+        if (text) text.textContent = 'Скопировано!';
+
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (icon) icon.textContent = '📋';
+          if (text) text.textContent = 'Копировать';
+        }, 2000);
+      }
+    }
+  </script>
+
+</body>
+</html>
